@@ -2,6 +2,8 @@
    GLOBAL
 ========================================================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
 :root {
   --navy: #06294f;
   --navy-dark: #031d39;
@@ -35,9 +37,11 @@ html {
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   color: var(--text);
   background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 button,
@@ -68,72 +72,166 @@ img {
 /* =========================================================
    ICONS
    ---------------------------------------------------------
-   Change icon size, color and stroke here.
-   JSX should only contain the icon class.
-========================================================= */
+   Flaticon image-based icons matching the design.
+   Use <img> tags with the icon class and src pointing to
+   the Flaticon CDN URLs listed below.
+
+   FLATICON ICON URLS (free, no attribution needed for basic):
+   ─────────────────────────────────────────────────────────
+   Login / User:
+     https://cdn-icons-png.flaticon.com/512/1077/1077063.png
+
+   Menu (hamburger):
+     https://cdn-icons-png.flaticon.com/512/2976/2976215.png
+
+   Close (X):
+     https://cdn-icons-png.flaticon.com/512/1828/1828778.png
+
+   Arrow Right (CTA / slider):
+     https://cdn-icons-png.flaticon.com/512/271/271228.png
+
+   Arrow Left (slider):
+     https://cdn-icons-png.flaticon.com/512/271/271220.png
+
+   Stats — Years of Experience (trophy/award):
+     https://cdn-icons-png.flaticon.com/512/3113/3113618.png
+
+   Stats — Institutions Served (building):
+     https://cdn-icons-png.flaticon.com/512/2784/2784459.png
+
+   Stats — Projects Delivered (briefcase):
+     https://cdn-icons-png.flaticon.com/512/3281/3281306.png
+
+   Stats — 24/7 Support (headset):
+     https://cdn-icons-png.flaticon.com/512/5787/5787016.png
+
+   Solutions — Software (monitor/code):
+     https://cdn-icons-png.flaticon.com/512/2620/2620290.png
+
+   Solutions — Hardware (server/desktop):
+     https://cdn-icons-png.flaticon.com/512/984/984196.png
+
+   Solutions — IT Services (support/gear):
+     https://cdn-icons-png.flaticon.com/512/1163/1163566.png
+
+   Services — School & College ERP:
+     https://cdn-icons-png.flaticon.com/512/4406/4406305.png
+
+   Services — Website Development (globe):
+     https://cdn-icons-png.flaticon.com/512/364/364089.png
+
+   Services — Interactive Panel (monitor):
+     https://cdn-icons-png.flaticon.com/512/2092/2092662.png
+
+   Services — CCTV & Surveillance:
+     https://cdn-icons-png.flaticon.com/512/711/711233.png
+
+   Services — Networking Solutions (wifi/router):
+     https://cdn-icons-png.flaticon.com/512/2917/2917995.png
+
+   Services — AMC & IT Support (headset):
+     https://cdn-icons-png.flaticon.com/512/5787/5787016.png
+
+   Footer — Location pin:
+     https://cdn-icons-png.flaticon.com/512/535/535137.png
+
+   Footer — Email:
+     https://cdn-icons-png.flaticon.com/512/732/732200.png
+
+   Footer — Phone:
+     https://cdn-icons-png.flaticon.com/512/597/597177.png
+   ─────────────────────────────────────────────────────────
+=========================================================
 
 /* Navbar login icon */
 .login-icon {
   width: 18px;
   height: 18px;
-  color: currentColor;
-  stroke-width: 2;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Mobile menu / close icon */
 .menu-icon {
   width: 26px;
   height: 26px;
-  color: var(--navy);
-  stroke-width: 2;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(13%) sepia(47%) saturate(700%) hue-rotate(183deg);
+  display: block;
 }
 
 /* Hero slider arrows */
 .hero-arrow-icon {
   width: 20px;
   height: 20px;
-  color: var(--white);
-  stroke-width: 2;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  display: block;
 }
 
 /* Hero CTA arrow */
 .primary-button-icon {
   width: 18px;
   height: 18px;
-  color: currentColor;
-  stroke-width: 2;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  display: inline-block;
+  vertical-align: middle;
 }
 
-/* Statistics icons */
+/* Statistics icons — white tinted to match green */
 .stat-icon {
   width: 36px;
   height: 36px;
-  color: var(--green);
-  stroke-width: 1.8;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(72%) sepia(60%) saturate(400%) hue-rotate(40deg) brightness(1.1);
+  display: block;
 }
 
-/* Solution icons */
-.solution-icon-svg {
+/* Solution icons — colored per card via nth-child below */
+.solution-icon-img {
   width: 30px;
   height: 30px;
-  color: currentColor;
-  stroke-width: 1.8;
+  object-fit: contain;
+  display: block;
 }
 
-/* Core service icons */
+/* Default solution icon color: green */
+.solution-icon .solution-icon-img {
+  filter: brightness(0) saturate(100%) invert(57%) sepia(55%) saturate(500%) hue-rotate(43deg);
+}
+
+/* Solution card 2: blue */
+.solution-card:nth-child(2) .solution-icon .solution-icon-img {
+  filter: brightness(0) saturate(100%) invert(37%) sepia(80%) saturate(600%) hue-rotate(195deg);
+}
+
+/* Solution card 3: orange */
+.solution-card:nth-child(3) .solution-icon .solution-icon-img {
+  filter: brightness(0) saturate(100%) invert(58%) sepia(70%) saturate(600%) hue-rotate(10deg);
+}
+
+/* Core service icons — white on dark navy background */
 .service-icon {
   width: 38px;
   height: 38px;
-  color: var(--white);
-  stroke-width: 1.8;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  display: block;
+  margin: 0 auto 9px;
 }
 
 /* Footer contact icons */
 .footer-icon {
   width: 16px;
   height: 16px;
-  color: #ef6d4b;
-  stroke-width: 2;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(50%) sepia(60%) saturate(700%) hue-rotate(335deg) brightness(1.1);
+  display: inline-block;
+  flex-shrink: 0;
+  margin-top: 3px;
 }
 
 
@@ -182,8 +280,9 @@ img {
 .nav-links a {
   position: relative;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #222;
+  letter-spacing: 0.3px;
   transition: color var(--transition);
 }
 
@@ -204,16 +303,17 @@ img {
   gap: 7px;
 
   min-width: 88px;
-  padding: 9px 16px;
+  padding: 10px 18px;
 
   border: 0;
-  border-radius: 5px;
+  border-radius: 6px;
 
   background: var(--green-dark);
   color: var(--white) !important;
 
   font-size: 14px;
   font-weight: 600;
+  letter-spacing: 0.3px;
 
   transition:
     background var(--transition),
@@ -250,7 +350,7 @@ img {
 ========================================================= */
 
 .hero {
-  min-height: 365px;
+  min-height: 560px;
 
   position: relative;
   overflow: hidden;
@@ -300,19 +400,21 @@ img {
 .hero-label {
   margin: 0;
 
-  font-size: clamp(30px, 4vw, 44px);
-  font-weight: 800;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 550;
+  line-height: 1.1;
 
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .hero h1 {
   margin: 6px 0 14px;
 
-  font-size: clamp(30px, 4vw, 44px);
-  line-height: 1.05;
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 550;
+  line-height: 1.1;
 
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .hero h1 span {
@@ -410,7 +512,7 @@ img {
   position: relative;
   z-index: 5;
 
-  margin-top: -32px;
+  margin-top: -65px;
 }
 
 .stats-grid {
@@ -419,7 +521,7 @@ img {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 
-  background: rgba(7, 42, 79, 0.92);
+  background: rgba(19, 58, 99, 0.92);
 
   border: 1px solid rgba(166, 201, 58, 0.5);
   border-radius: 15px;
@@ -478,10 +580,11 @@ img {
 
   color: var(--green-dark);
 
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
 
-  letter-spacing: 1.5px;
+  letter-spacing: 1.8px;
 }
 
 .section-heading span::before,
@@ -495,12 +598,13 @@ img {
 }
 
 .section-heading h2 {
-  margin: 10px 0 0;
+  margin: 12px 0 0;
 
   color: var(--navy);
 
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 
@@ -522,7 +626,7 @@ img {
 }
 
 .solution-card {
-  min-height: 128px;
+  min-height: 170px;
 
   display: flex;
   align-items: center;
@@ -583,6 +687,8 @@ img {
   margin: 0 0 7px;
 
   font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .solution-card p {
@@ -621,7 +727,7 @@ img {
 }
 
 .service-card {
-  min-height: 125px;
+  min-height: 170px;
 
   padding: 12px 8px;
 
@@ -643,14 +749,12 @@ img {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.service-icon {
-  margin: 0 auto 9px;
-}
-
 .service-card h3 {
   margin: 0 0 6px;
 
   font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
 }
 
 .service-card p {
@@ -710,8 +814,9 @@ img {
 
   color: var(--green-dark);
 
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .why-card p {
@@ -826,7 +931,9 @@ img {
 .footer h3 {
   margin: 0 0 12px;
 
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .footer p {
@@ -884,6 +991,7 @@ img {
   color: #e0e7ee;
 
   font-size: 12px;
+  font-weight: 500;
 
   transition: color var(--transition);
 }
@@ -971,6 +1079,10 @@ img {
   text-align: center;
 
   color: var(--navy);
+
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
 }
 
 .auth-card > p {
@@ -981,6 +1093,7 @@ img {
   color: var(--muted);
 
   font-size: 14px;
+  font-weight: 500;
 }
 
 .auth-card form {
@@ -993,6 +1106,7 @@ img {
 
   font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .auth-card input {

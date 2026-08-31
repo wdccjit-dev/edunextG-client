@@ -1,3 +1,4 @@
+// src/pages/admin/Reports.jsx
 function Reports() {
   return (
     <div className="admin-page">
@@ -24,6 +25,12 @@ function Reports() {
           <h3>Services</h3>
           <strong>24</strong>
           <p>Currently available services</p>
+        </article>
+
+        <article className="admin-report-card">
+          <h3>Active Users</h3>
+          <strong>150+</strong>
+          <p>Active platform users</p>
         </article>
       </div>
     </div>

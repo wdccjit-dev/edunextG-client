@@ -1,20 +1,27 @@
+// src/pages/admin/Activity.jsx
+import { FiActivity as ActivityIcon } from "react-icons/fi";
+
 const activities = [
   {
+    id: 1,
     action: "New institution added",
     user: "Administrator",
     time: "10 minutes ago",
   },
   {
+    id: 2,
     action: "Project information updated",
     user: "Administrator",
     time: "42 minutes ago",
   },
   {
+    id: 3,
     action: "Service configuration changed",
     user: "Administrator",
     time: "2 hours ago",
   },
   {
+    id: 4,
     action: "System maintenance completed",
     user: "System",
     time: "Yesterday",
@@ -40,13 +47,10 @@ function Activity() {
                 <th>Time</th>
               </tr>
             </thead>
-
             <tbody>
               {activities.map((activity) => (
-                <tr key={`${activity.action}-${activity.time}`}>
-                  <td>
-                    <strong>{activity.action}</strong>
-                  </td>
+                <tr key={activity.id}>
+                  <td><strong>{activity.action}</strong></td>
                   <td>{activity.user}</td>
                   <td>{activity.time}</td>
                 </tr>

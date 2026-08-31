@@ -1,3 +1,4 @@
+// src/pages/admin/Settings.jsx
 function Settings() {
   return (
     <div className="admin-page">
@@ -34,7 +35,6 @@ function Settings() {
 
           <div className="admin-form-group">
             <label>System Status</label>
-
             <select defaultValue="active">
               <option value="active">Active</option>
               <option value="maintenance">Maintenance</option>
@@ -43,7 +43,6 @@ function Settings() {
 
           <div className="admin-form-group">
             <label>Admin Email Notifications</label>
-
             <select defaultValue="enabled">
               <option value="enabled">Enabled</option>
               <option value="disabled">Disabled</option>

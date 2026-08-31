@@ -1,38 +1,47 @@
-import { Link } from "react-router-dom";
-import logo from "../assets/Edunextglogo.png";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    navigate("/admin");
+  };
+
   return (
-    <section className="auth-page">
+    <main className="auth-page">
       <div className="auth-card">
-        <div className="auth-logo">
-          <img src={logo} alt="EduNextG" />
-        </div>
+        <h1>Admin Login</h1>
 
-        <h1>Welcome Back</h1>
-        <p>Login to continue to your account.</p>
+        <p>Login to access the administration panel.</p>
 
-        <form>
-          <label>Email</label>
-          <input type="email" placeholder="Enter your email" />
+        <form onSubmit={handleLogin}>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Enter your email"
+            required
+          />
 
-          <label>Password</label>
-          <input type="password" placeholder="Enter your password" />
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="Enter your password"
+            required
+          />
 
           <div className="forgot-password">
-            <Link to="/forgot-password">Forgot Password?</Link>
+            <a href="/forgot-password">Forgot Password?</a>
           </div>
 
           <button type="submit" className="primary-button auth-submit">
             Login
           </button>
         </form>
-
-        <Link to="/" className="back-home">
-          Back to Home
-        </Link>
       </div>
-    </section>
+    </main>
   );
 }
 

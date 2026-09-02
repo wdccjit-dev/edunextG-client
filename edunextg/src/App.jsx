@@ -3,13 +3,13 @@ import "./App.css";
 
 import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
+import AdminRoute from "./layouts/AdminRoute";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 
 import AdminDashboard from "./pages/AdminDashboard";
-
 import Users from "./pages/admin/Users";
 import Services from "./pages/admin/Services";
 import Projects from "./pages/admin/Projects";
@@ -20,44 +20,25 @@ import Settings from "./pages/admin/Settings";
 function App() {
   return (
     <Routes>
-
-      {/* PUBLIC WEBSITE */}
+      {/* Public website */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/forgot-password"
-          element={<ForgotPassword />}
-        />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
 
-
-      {/* ADMIN PANEL */}
-      <Route path="/admin" element={<AdminLayout />}>
-
-        {/* /admin */}
-        <Route index element={<AdminDashboard />} />
-
-        {/* /admin/users */}
-        <Route path="users" element={<Users />} />
-
-        {/* /admin/services */}
-        <Route path="services" element={<Services />} />
-
-        {/* /admin/projects */}
-        <Route path="projects" element={<Projects />} />
-
-        {/* /admin/reports */}
-        <Route path="reports" element={<Reports />} />
-
-        {/* /admin/activity */}
-        <Route path="activity" element={<Activity />} />
-
-        {/* /admin/settings */}
-        <Route path="settings" element={<Settings />} />
-
+      {/* Protected administration */}
+      <Route element={<AdminRoute />}>
+        <Route element={<AdminLayout />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<Users />} />
+          <Route path="/admin/services" element={<Services />} />
+          <Route path="/admin/projects" element={<Projects />} />
+          <Route path="/admin/reports" element={<Reports />} />
+          <Route path="/admin/activity" element={<Activity />} />
+          <Route path="/admin/settings" element={<Settings />} />
+        </Route>
       </Route>
-
     </Routes>
   );
 }

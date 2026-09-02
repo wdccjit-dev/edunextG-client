@@ -5,34 +5,68 @@ import {
   FiUsers,
 } from "react-icons/fi";
 
-const activities = [
-  {
-    icon: FiUsers,
-    title: "New institution added",
-    description: "Institution registration was completed",
-    time: "10 min ago",
-  },
-  {
-    icon: FiFileText,
-    title: "Project updated",
-    description: "Project information was modified",
-    time: "42 min ago",
-  },
-  {
-    icon: FiSettings,
-    title: "System settings changed",
-    description: "Administration settings were updated",
-    time: "2 hrs ago",
-  },
-  {
-    icon: FiActivity,
-    title: "System maintenance completed",
-    description: "Scheduled maintenance completed successfully",
-    time: "Yesterday",
-  },
-];
+function RecentActivity({ activities = [] }) {
+  const getActivityIcon = (action = "") => {
+    const value = action.toLowerCase();
 
-function RecentActivity() {
+    if (
+      value.includes("user") ||
+      value.includes("institution") ||
+      value.includes("admin")
+    ) {
+      return FiUsers;
+    }
+
+    if (
+      value.includes("project") ||
+      value.includes("report")
+    ) {
+      return FiFileText;
+    }
+
+    if (
+      value.includes("setting") ||
+      value.includes("service")
+    ) {
+      return FiSettings;
+    }
+
+    return FiActivity;
+  };
+
+  const formatTime = (date) => {
+    if (!date) {
+      return "";
+    }
+
+    const activityDate = new Date(date);
+    const now = new Date();
+
+    const difference = Math.floor(
+      (now - activityDate) / 1000
+    );
+
+    if (difference < 60) {
+      return "Just now";
+    }
+
+    if (difference < 3600) {
+      const minutes = Math.floor(difference / 60);
+      return `${minutes} min ago`;
+    }
+
+    if (difference < 86400) {
+      const hours = Math.floor(difference / 3600);
+      return `${hours} hrs ago`;
+    }
+
+    if (difference < 172800) {
+      return "Yesterday";
+    }
+
+    return activityDate.toLocaleDateString();
+  };
+
   return (
     <section className="admin-panel admin-activity-panel">
       <div className="admin-panel-header">
@@ -45,21 +79,41 @@ function RecentActivity() {
       </div>
 
       <div className="admin-activity-list">
-        {activities.map(
-          ({ icon: Icon, title, description, time }) => (
-            <div className="admin-activity" key={`${title}-${time}`}>
-              <div className="activity-icon">
-                <Icon />
-              </div>
-
-              <div>
-                <strong>{title}</strong>
-                <p>{description}</p>
-              </div>
-
-              <time>{time}</time>
+        {activities.length === 0 ? (
+          <div className="admin-activity">
+            <div className="activity-icon">
+              <FiActivity />
             </div>
-          ),
+
+            <div>
+              <strong>No recent activity</strong>
+              <p>No activity has been recorded yet.</p>
+            </div>
+          </div>
+        ) : (
+          activities.map((activity) => {
+            const Icon = getActivityIcon(activity.action);
+
+            return (
+              <div
+                className="admin-activity"
+                key={activity.id}
+              >
+                <div className="activity-icon">
+                  <Icon />
+                </div>
+
+                <div>
+                  <strong>{activity.action}</strong>
+                  <p>{activity.description}</p>
+                </div>
+
+                <time>
+                  {formatTime(activity.created_at)}
+                </time>
+              </div>
+            );
+          })
         )}
       </div>
     </section>

@@ -1,40 +1,89 @@
 // src/pages/admin/Activity.jsx
-import { FiActivity as ActivityIcon } from "react-icons/fi";
 
-const activities = [
-  {
-    id: 1,
-    action: "New institution added",
-    user: "Administrator",
-    time: "10 minutes ago",
-  },
-  {
-    id: 2,
-    action: "Project information updated",
-    user: "Administrator",
-    time: "42 minutes ago",
-  },
-  {
-    id: 3,
-    action: "Service configuration changed",
-    user: "Administrator",
-    time: "2 hours ago",
-  },
-  {
-    id: 4,
-    action: "System maintenance completed",
-    user: "System",
-    time: "Yesterday",
-  },
-];
+import { useEffect, useState } from "react";
 
 function Activity() {
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        const token =
+          localStorage.getItem("adminToken") ||
+          localStorage.getItem("token") ||
+          localStorage.getItem("authToken") ||
+          localStorage.getItem("accessToken");
+
+        const response = await fetch(
+          "http://localhost:5000/api/activity",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.message || "Failed to fetch activities"
+          );
+        }
+
+        setActivities(data.activities || []);
+      } catch (error) {
+        console.error("Activity fetch error:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchActivities();
+  }, []);
+
+  const formatTime = (date) => {
+    if (!date) return "-";
+
+    const activityDate = new Date(date);
+    const now = new Date();
+
+    const difference = Math.floor(
+      (now - activityDate) / 1000
+    );
+
+    if (difference < 60) {
+      return "Just now";
+    }
+
+    if (difference < 3600) {
+      const minutes = Math.floor(difference / 60);
+      return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
+    }
+
+    if (difference < 86400) {
+      const hours = Math.floor(difference / 3600);
+      return `${hours} hour${hours !== 1 ? "s" : ""} ago`;
+    }
+
+    if (difference < 172800) {
+      return "Yesterday";
+    }
+
+    return activityDate.toLocaleDateString();
+  };
+
   return (
     <div className="admin-page">
       <div className="admin-page-header">
         <span>SYSTEM ACTIVITY</span>
         <h2>Activity</h2>
-        <p>Track important actions performed inside the administration panel.</p>
+        <p>
+          Track important actions performed inside the administration panel.
+        </p>
       </div>
 
       <div className="admin-table-panel">
@@ -47,14 +96,35 @@ function Activity() {
                 <th>Time</th>
               </tr>
             </thead>
+
             <tbody>
-              {activities.map((activity) => (
-                <tr key={activity.id}>
-                  <td><strong>{activity.action}</strong></td>
-                  <td>{activity.user}</td>
-                  <td>{activity.time}</td>
+              {loading ? (
+                <tr>
+                  <td colSpan="3">Loading activity...</td>
                 </tr>
-              ))}
+              ) : error ? (
+                <tr>
+                  <td colSpan="3">{error}</td>
+                </tr>
+              ) : activities.length === 0 ? (
+                <tr>
+                  <td colSpan="3">
+                    No activity recorded yet.
+                  </td>
+                </tr>
+              ) : (
+                activities.map((activity) => (
+                  <tr key={activity.id}>
+                    <td>
+                      <strong>{activity.action}</strong>
+                    </td>
+
+                    <td>{activity.user_name}</td>
+
+                    <td>{formatTime(activity.created_at)}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

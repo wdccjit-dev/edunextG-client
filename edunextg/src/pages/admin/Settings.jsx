@@ -1,46 +1,125 @@
-// src/pages/admin/Settings.jsx (Simplified version)
+// src/pages/admin/Settings.jsx
 import { useState, useEffect } from "react";
 import { FiSave, FiCheck, FiAlertCircle, FiX } from "react-icons/fi";
 
 function Settings() {
   const [settings, setSettings] = useState({
-    companyName: "EduNextG",
-    email: "admin@edunextg.com",
-    phone: "+91 98765 43210",
-    address: "123 Education Street, New Delhi, India",
-    website: "www.edunextg.com",
-    systemStatus: "active",
-    emailNotifications: "enabled",
-    notes: "All systems operational.",
-  });
+  companyName: "EduNextG",
+  email: "admin@edunextg.com",
+  phone: "+91 98765 43210",
+  address: "123 Education Street, Kolkata, India",
+  website: "www.edunextg.com",
+  systemStatus: "active",
+  emailNotifications: "enabled",
+  notes: "All systems operational.",
+});
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [notification, setNotification] = useState(null);
 
   useEffect(() => {
-    const savedSettings = localStorage.getItem('adminSettings');
-    if (savedSettings) {
+    const fetchSettings = async () => {
       try {
-        setSettings(JSON.parse(savedSettings));
-      } catch (e) {
-        console.error('Error loading settings:', e);
+        const token =
+          localStorage.getItem("adminToken") ||
+          localStorage.getItem("token") ||
+          localStorage.getItem("authToken") ||
+          localStorage.getItem("accessToken");
+
+        const response = await fetch(
+          "http://localhost:5000/api/settings",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.message || "Failed to fetch settings"
+          );
+        }
+
+        setSettings((previous) => ({
+          ...previous,
+          ...data.settings,
+        }));
+      } catch (error) {
+        console.error("Settings fetch error:", error);
+
+        setNotification({
+          type: "error",
+          message: error.message,
+        });
+      } finally {
+        setLoading(false);
       }
-    }
+    };
+
+    fetchSettings();
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSettings({ ...settings, [name]: value });
+
+    setSettings({
+      ...settings,
+      [name]: value,
+    });
   };
 
-  const handleSave = () => {
-    setLoading(true);
-    setTimeout(() => {
-      localStorage.setItem('adminSettings', JSON.stringify(settings));
-      setLoading(false);
-      setNotification({ type: 'success', message: 'Settings saved successfully!' });
-      setTimeout(() => setNotification(null), 3000);
-    }, 800);
+  const handleSave = async () => {
+    try {
+      setSaving(true);
+
+      const token =
+        localStorage.getItem("adminToken") ||
+        localStorage.getItem("token") ||
+        localStorage.getItem("authToken") ||
+        localStorage.getItem("accessToken");
+
+      const response = await fetch(
+        "http://localhost:5000/api/settings",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(settings),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to save settings"
+        );
+      }
+
+      setNotification({
+        type: "success",
+        message: "Settings saved successfully!",
+      });
+
+      setTimeout(() => {
+        setNotification(null);
+      }, 3000);
+    } catch (error) {
+      console.error("Settings save error:", error);
+
+      setNotification({
+        type: "error",
+        message: error.message,
+      });
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -54,13 +133,27 @@ function Settings() {
       {notification && (
         <div className={`admin-toast ${notification.type}`}>
           <div className={`admin-toast-icon ${notification.type}`}>
-            {notification.type === 'success' ? <FiCheck /> : <FiAlertCircle />}
+            {notification.type === "success" ? (
+              <FiCheck />
+            ) : (
+              <FiAlertCircle />
+            )}
           </div>
+
           <div className="admin-toast-content">
-            <h4>Success</h4>
+            <h4>
+              {notification.type === "success"
+                ? "Success"
+                : "Error"}
+            </h4>
+
             <p>{notification.message}</p>
           </div>
-          <button className="admin-toast-close" onClick={() => setNotification(null)}>
+
+          <button
+            className="admin-toast-close"
+            onClick={() => setNotification(null)}
+          >
             <FiX />
           </button>
         </div>
@@ -78,6 +171,7 @@ function Settings() {
                 name="companyName"
                 value={settings.companyName}
                 onChange={handleChange}
+                disabled={loading}
               />
             </div>
 
@@ -88,6 +182,7 @@ function Settings() {
                 name="email"
                 value={settings.email}
                 onChange={handleChange}
+                disabled={loading}
               />
             </div>
 
@@ -98,6 +193,7 @@ function Settings() {
                 name="phone"
                 value={settings.phone}
                 onChange={handleChange}
+                disabled={loading}
               />
             </div>
 
@@ -108,6 +204,7 @@ function Settings() {
                 name="website"
                 value={settings.website}
                 onChange={handleChange}
+                disabled={loading}
               />
             </div>
 
@@ -118,6 +215,7 @@ function Settings() {
                 value={settings.address}
                 onChange={handleChange}
                 rows="2"
+                disabled={loading}
               />
             </div>
 
@@ -127,6 +225,7 @@ function Settings() {
                 name="systemStatus"
                 value={settings.systemStatus}
                 onChange={handleChange}
+                disabled={loading}
               >
                 <option value="active">Active</option>
                 <option value="maintenance">Maintenance</option>
@@ -140,6 +239,7 @@ function Settings() {
                 name="emailNotifications"
                 value={settings.emailNotifications}
                 onChange={handleChange}
+                disabled={loading}
               >
                 <option value="enabled">Enabled</option>
                 <option value="disabled">Disabled</option>
@@ -154,13 +254,18 @@ function Settings() {
                 onChange={handleChange}
                 rows="3"
                 placeholder="Add system notes..."
+                disabled={loading}
               />
             </div>
           </div>
 
           <div className="admin-form-actions">
-            <button className="admin-save-button" onClick={handleSave} disabled={loading}>
-              <FiSave /> {loading ? 'Saving...' : 'Save Changes'}
+            <button
+              className="admin-save-button"
+              onClick={handleSave}
+              disabled={loading || saving}
+            >
+              <FiSave /> {saving ? "Saving..." : "Save Changes"}
             </button>
           </div>
         </section>

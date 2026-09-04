@@ -36,6 +36,43 @@ router.get("/", authenticateAdmin, async (req, res) => {
   }
 });
 
+router.get("/public", async (req, res) => {
+  try {
+    const [rows] = await pool.execute(
+      `SELECT setting_key, setting_value
+       FROM settings
+       WHERE setting_key IN (
+         'companyName',
+         'email',
+         'phone',
+         'address',
+         'website',
+         'mapLocation',
+         'mapUrl'
+       )
+       ORDER BY setting_key`
+    );
+
+    const settings = {};
+
+    rows.forEach((row) => {
+      settings[row.setting_key] = row.setting_value;
+    });
+
+    res.json({
+      success: true,
+      settings,
+    });
+  } catch (error) {
+    console.error("Get public settings error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch public settings",
+    });
+  }
+});
+
 
 // SAVE SETTINGS
 router.put("/", authenticateAdmin, async (req, res) => {

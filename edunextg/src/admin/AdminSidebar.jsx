@@ -8,6 +8,7 @@ import {
   FiLogOut,
   FiSettings,
   FiUsers,
+  FiMail,
 } from "react-icons/fi";
 
 import logo from "../assets/Edunextglogo.png";
@@ -54,6 +55,11 @@ function AdminSidebar() {
         <NavLink to="/admin/activity">
           <FiActivity />
           Activity
+        </NavLink>
+
+        <NavLink to="/admin/contact-messages">
+          <FiMail />
+          Contact Messages
         </NavLink>
 
         <NavLink to="/admin/settings">

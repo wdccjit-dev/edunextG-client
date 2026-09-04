@@ -9,6 +9,7 @@ const serviceRoutes = require("./routes/serviceRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const activityRoutes = require("./routes/activityRoutes");
 const settingsRoutes = require("./routes/settingsRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
 const authenticateAdmin = require("./middleware/authMiddleware");
 
@@ -32,6 +33,7 @@ app.use("/api/services", serviceRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/activity", activityRoutes);
 app.use("/api/settings", settingsRoutes);
+app.use("/api/contact", contactRoutes);
 app.get("/", (req, res) => {
   res.json({
     message: "EduNextG API is running",

@@ -2143,3 +2143,206 @@
     padding: 6px 12px;
   }
 }
+/* GOOGLE MAP SETTINGS */
+
+.settings-map-section {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border);
+}
+
+.settings-map-section h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: var(--navy);
+}
+
+.settings-map-description {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.settings-map-field {
+  margin-bottom: 20px;
+}
+
+.settings-map-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.settings-map-field input {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.settings-map-field input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.settings-map-field small {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+/* =========================================
+   CONTACT MESSAGES - ADMIN
+========================================= */
+
+.contact-messages-card {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.contact-messages-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.contact-messages-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+}
+
+.contact-messages-table th {
+  padding: 15px 16px;
+  background: #f5f8fc;
+  border-bottom: 1px solid var(--border);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.contact-messages-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.contact-messages-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.contact-messages-table tbody tr:hover {
+  background: #fafcff;
+}
+
+.contact-messages-table td a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.contact-messages-table td a:hover {
+  text-decoration: underline;
+}
+
+.contact-message-text {
+  max-width: 280px;
+  min-width: 220px;
+  line-height: 1.6;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.contact-messages-table select {
+  min-width: 100px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.contact-messages-table select:focus {
+  border-color: var(--blue);
+}
+
+.contact-delete-button {
+  padding: 7px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #dc3545;
+  color: white;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.contact-delete-button:hover {
+  opacity: 0.9;
+}
+
+.contact-no-messages {
+  padding: 70px 30px;
+  text-align: center;
+}
+
+.contact-no-messages h3 {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 20px;
+}
+
+.contact-no-messages p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.admin-refresh-button {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 7px;
+  background: var(--navy);
+  color: var(--white);
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.admin-refresh-button:hover {
+  background: var(--blue);
+}
+
+.admin-error {
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #fff1f1;
+  color: #c62828;
+  font-size: 14px;
+}
+
+.admin-loading {
+  padding: 50px;
+  text-align: center;
+  color: var(--muted);
+}

@@ -12,6 +12,12 @@ function Settings() {
   systemStatus: "active",
   emailNotifications: "enabled",
   notes: "All systems operational.",
+
+  mapLocation:
+    "EDUNEXTG INDIA LLP, AF-333, Rabindra Pally Rd, Talbagan, Prafulla Kanan, Kestopur, Kolkata, West Bengal 700102",
+
+  mapUrl:
+    "https://www.google.com/maps?q=EDUNEXTG%20INDIA%20LLP%2C%20AF-333%2C%20Rabindra%20Pally%20Rd%2C%20Talbagan%2C%20Prafulla%20Kanan%2C%20Kestopur%2C%20Kolkata%2C%20West%20Bengal%20700102&output=embed",
 });
 
   const [loading, setLoading] = useState(true);
@@ -269,6 +275,56 @@ function Settings() {
             </button>
           </div>
         </section>
+      </div>
+      <div className="settings-map-section">
+        <h3>Google Maps</h3>
+
+        <p className="settings-map-description">
+          Manage the location displayed on the Contact Us page.
+        </p>
+
+        <div className="settings-map-field">
+          <label htmlFor="mapLocation">
+            Google Maps Location
+          </label>
+
+          <input
+            id="mapLocation"
+            type="text"
+            value={settings.mapLocation}
+            onChange={(e) =>
+              setSettings((previous) => ({
+                ...previous,
+                mapLocation: e.target.value,
+              }))
+            }
+            placeholder="Enter office location"
+          />
+        </div>
+
+        <div className="settings-map-field">
+          <label htmlFor="mapUrl">
+            Google Maps Embed URL
+          </label>
+
+          <input
+            id="mapUrl"
+            type="text"
+            className="settings-map-url-input"
+            value={settings.mapUrl}
+            onChange={(e) =>
+              setSettings((previous) => ({
+                ...previous,
+                mapUrl: e.target.value,
+              }))
+            }
+            placeholder="Paste Google Maps embed URL"
+          />
+
+          <small>
+            This URL controls the map displayed on the Contact Us page.
+          </small>
+        </div>
       </div>
     </div>
   );

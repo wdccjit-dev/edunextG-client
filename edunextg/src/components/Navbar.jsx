@@ -11,7 +11,7 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="container navbar-inner">
-        <Link to="/" className="logo">
+        <Link to="/" className="logo" onClick={closeMenu}>
           <img src={logo} alt="EduNextG" />
         </Link>
 
@@ -20,25 +20,25 @@ function Navbar() {
             Home
           </Link>
 
-          <a href="#services" onClick={closeMenu}>
+          <Link to="/services" onClick={closeMenu}>
             Services
-          </a>
+          </Link>
 
-          <a href="#products" onClick={closeMenu}>
+          <Link to="/products" onClick={closeMenu}>
             Products
-          </a>
+          </Link>
 
-          <a href="#about" onClick={closeMenu}>
+          <Link to="/about" onClick={closeMenu}>
             About Us
-          </a>
+          </Link>
 
-          <a href="#clients" onClick={closeMenu}>
+          <Link to="/clients" onClick={closeMenu}>
             Clients
-          </a>
+          </Link>
 
-          <a href="#contact" onClick={closeMenu}>
+          <Link to="/contact" onClick={closeMenu}>
             Contact Us
-          </a>
+          </Link>
 
           <Link
             to="/login"

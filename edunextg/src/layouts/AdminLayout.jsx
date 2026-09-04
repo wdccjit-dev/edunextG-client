@@ -14,6 +14,7 @@ import {
   FiUser,
   FiShield,
   FiChevronDown,
+  FiMail,
 } from "react-icons/fi";
 import logo from "../assets/Edunextglogo.png";
 import "../admin/Admin.css";
@@ -99,6 +100,10 @@ function AdminLayout() {
 
           <NavLink to="/admin/activity" onClick={closeSidebar}>
             <FiActivity /> Activity
+          </NavLink>
+
+          <NavLink to="/admin/contact-messages" onClick={closeSidebar}>
+            <FiMail /> Contact Messages
           </NavLink>
 
           <NavLink to="/admin/settings" onClick={closeSidebar}>

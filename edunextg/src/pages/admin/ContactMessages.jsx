@@ -5,6 +5,11 @@ function ContactMessages() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Reply modal
+  const [replyMessage, setReplyMessage] = useState(null);
+  const [replyText, setReplyText] = useState("");
+  const [sendingReply, setSendingReply] = useState(false);
+
   const getToken = () => {
     return (
       localStorage.getItem("adminToken") ||
@@ -51,6 +56,95 @@ function ContactMessages() {
     fetchMessages();
   }, []);
 
+  /* =========================
+     OPEN REPLY MODAL
+  ========================= */
+
+  const openReplyModal = (message) => {
+    setReplyMessage(message);
+    setReplyText("");
+  };
+
+  /* =========================
+     CLOSE REPLY MODAL
+  ========================= */
+
+  const closeReplyModal = () => {
+    if (sendingReply) {
+      return;
+    }
+
+    setReplyMessage(null);
+    setReplyText("");
+  };
+
+  /* =========================
+     SEND REPLY
+  ========================= */
+
+  const sendReply = async (event) => {
+    event.preventDefault();
+
+    if (!replyMessage) {
+      return;
+    }
+
+    if (!replyText.trim()) {
+      alert("Please enter a reply message.");
+      return;
+    }
+
+    try {
+      setSendingReply(true);
+
+      const token = getToken();
+
+      const response = await fetch(
+        `http://localhost:5000/api/contact/${replyMessage.id}/reply`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            message: replyText.trim(),
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to send reply"
+        );
+      }
+
+      alert("Reply sent successfully!");
+
+      // Automatically change status to replied
+      setMessages((previous) =>
+        previous.map((item) =>
+          item.id === replyMessage.id
+            ? { ...item, status: "replied" }
+            : item
+        )
+      );
+
+      closeReplyModal();
+    } catch (error) {
+      console.error("Send reply error:", error);
+      alert(error.message);
+    } finally {
+      setSendingReply(false);
+    }
+  };
+
+  /* =========================
+     UPDATE STATUS
+  ========================= */
+
   const updateStatus = async (id, status) => {
     try {
       const token = getToken();
@@ -87,6 +181,10 @@ function ContactMessages() {
       alert(error.message);
     }
   };
+
+  /* =========================
+     DELETE MESSAGE
+  ========================= */
 
   const deleteMessage = async (id) => {
     const confirmed = window.confirm(
@@ -143,9 +241,15 @@ function ContactMessages() {
 
   return (
     <div className="admin-page">
+
+      {/* =========================
+          PAGE HEADER
+      ========================= */}
+
       <div className="admin-page-header">
         <div>
           <h1>Contact Messages</h1>
+
           <p>
             Messages received from visitors through the Contact Us
             form.
@@ -167,10 +271,16 @@ function ContactMessages() {
         </div>
       )}
 
+      {/* =========================
+          MESSAGES TABLE
+      ========================= */}
+
       <div className="contact-messages-card">
+
         {messages.length === 0 ? (
           <div className="contact-no-messages">
             <h3>No messages yet</h3>
+
             <p>
               Messages submitted through the Contact Us form will
               appear here.
@@ -178,7 +288,9 @@ function ContactMessages() {
           </div>
         ) : (
           <div className="contact-messages-table-wrapper">
+
             <table className="contact-messages-table">
+
               <thead>
                 <tr>
                   <th>Name</th>
@@ -193,9 +305,13 @@ function ContactMessages() {
               </thead>
 
               <tbody>
+
                 {messages.map((message) => (
                   <tr key={message.id}>
-                    <td>{message.name}</td>
+
+                    <td>
+                      {message.name}
+                    </td>
 
                     <td>
                       <a href={`mailto:${message.email}`}>
@@ -207,7 +323,9 @@ function ContactMessages() {
                       {message.phone || "—"}
                     </td>
 
-                    <td>{message.subject}</td>
+                    <td>
+                      {message.subject}
+                    </td>
 
                     <td className="contact-message-text">
                       {message.message}
@@ -223,8 +341,14 @@ function ContactMessages() {
                           )
                         }
                       >
-                        <option value="new">New</option>
-                        <option value="read">Read</option>
+                        <option value="new">
+                          New
+                        </option>
+
+                        <option value="read">
+                          Read
+                        </option>
+
                         <option value="replied">
                           Replied
                         </option>
@@ -237,24 +361,184 @@ function ContactMessages() {
                       ).toLocaleString()}
                     </td>
 
+                    {/* ACTIONS */}
+
                     <td>
-                      <button
-                        type="button"
-                        className="contact-delete-button"
-                        onClick={() =>
-                          deleteMessage(message.id)
-                        }
-                      >
-                        Delete
-                      </button>
+                      <div className="contact-actions">
+
+                        <button
+                          type="button"
+                          className="contact-reply-button"
+                          onClick={() =>
+                            openReplyModal(message)
+                          }
+                        >
+                          Reply
+                        </button>
+
+                        <button
+                          type="button"
+                          className="contact-delete-button"
+                          onClick={() =>
+                            deleteMessage(message.id)
+                          }
+                        >
+                          Delete
+                        </button>
+
+                      </div>
                     </td>
+
                   </tr>
                 ))}
+
               </tbody>
+
             </table>
           </div>
         )}
+
       </div>
+
+      {/* =========================
+          REPLY MODAL
+      ========================= */}
+
+      {replyMessage && (
+        <div
+          className="reply-modal-overlay"
+          onMouseDown={(event) => {
+            if (
+              event.target === event.currentTarget &&
+              !sendingReply
+            ) {
+              closeReplyModal();
+            }
+          }}
+        >
+
+          <div className="reply-modal">
+
+            {/* HEADER */}
+
+            <div className="reply-modal-header">
+
+              <div>
+                <h2>
+                  Reply to {replyMessage.name}
+                </h2>
+
+                <p>
+                  Send a response directly to the visitor.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                className="reply-modal-close"
+                onClick={closeReplyModal}
+                disabled={sendingReply}
+              >
+                ×
+              </button>
+
+            </div>
+
+            {/* RECIPIENT */}
+
+            <div className="reply-recipient">
+
+              <div>
+                <span>To:</span>
+
+                <strong>
+                  {replyMessage.name}
+                </strong>
+              </div>
+
+              <a
+                href={`mailto:${replyMessage.email}`}
+              >
+                {replyMessage.email}
+              </a>
+
+            </div>
+
+            {/* ORIGINAL MESSAGE */}
+
+            <div className="reply-original-message">
+
+              <strong>
+                ORIGINAL MESSAGE
+              </strong>
+
+              <p>
+                <strong>Subject:</strong>{" "}
+                {replyMessage.subject}
+              </p>
+
+              <p>
+                {replyMessage.message}
+              </p>
+
+            </div>
+
+            {/* REPLY FORM */}
+
+            <form
+              className="reply-form"
+              onSubmit={sendReply}
+            >
+
+              <label htmlFor="replyMessage">
+                Your Reply
+              </label>
+
+              <textarea
+                id="replyMessage"
+                value={replyText}
+                onChange={(event) =>
+                  setReplyText(event.target.value)
+                }
+                placeholder="Write your reply here..."
+                disabled={sendingReply}
+              />
+
+              {/* BUTTONS */}
+
+              <div className="reply-modal-actions">
+
+                <button
+                  type="button"
+                  className="reply-cancel-button"
+                  onClick={closeReplyModal}
+                  disabled={sendingReply}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  className="reply-send-button"
+                  disabled={
+                    sendingReply ||
+                    !replyText.trim()
+                  }
+                >
+                  {sendingReply
+                    ? "Sending..."
+                    : "Send Reply"}
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+      )}
+
     </div>
   );
 }

@@ -3,8 +3,10 @@ const express = require("express");
 const pool = require("../db");
 const authenticateAdmin = require("../middleware/authMiddleware");
 const logActivity = require("../utils/activityLogger");
-const sendContactNotification = require("../utils/email");
-
+const {
+    sendContactNotification,
+    sendContactReply,
+  } = require("../utils/email");
 const router = express.Router();
 
 /*
@@ -285,6 +287,81 @@ router.delete("/:id", authenticateAdmin, async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Failed to delete message",
+    });
+  }
+});
+
+/*
+ * ADMIN
+ * Reply to contact message
+ */
+router.post("/:id/reply", authenticateAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { message } = req.body;
+
+    if (!message || !message.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Reply message is required",
+      });
+    }
+
+    // Get original contact message
+    const [messages] = await pool.execute(
+      `SELECT
+        id,
+        name,
+        email,
+        subject
+       FROM contact_messages
+       WHERE id = ?`,
+      [id]
+    );
+
+    if (messages.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Contact message not found",
+      });
+    }
+
+    const contact = messages[0];
+
+    // Send reply email
+    await sendContactReply({
+      name: contact.name,
+      email: contact.email,
+      subject: contact.subject,
+      message: message.trim(),
+    });
+
+    // Mark message as replied
+    await pool.execute(
+      `UPDATE contact_messages
+       SET status = 'replied'
+       WHERE id = ?`,
+      [id]
+    );
+
+    // Log activity
+    await logActivity({
+      adminId: req.admin.id,
+      action: "Contact message replied",
+      description: `Admin replied to contact message #${id} from ${contact.email}.`,
+    });
+
+    res.json({
+      success: true,
+      message: "Reply sent successfully",
+    });
+
+  } catch (error) {
+    console.error("Contact reply error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to send reply",
     });
   }
 });

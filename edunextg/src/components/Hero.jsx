@@ -3,6 +3,7 @@ import {
   FiChevronLeft,
   FiChevronRight,
 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import heroImage from "../assets/Heroimage1.jpeg";
 
 function Hero() {
@@ -37,10 +38,10 @@ function Hero() {
           for schools, colleges and institutions.
         </p>
 
-        <a href="#services" className="primary-button">
+        <Link to="/services" className="primary-button">
           Explore Our Services
           <FiArrowRight className="primary-button-icon" />
-        </a>
+        </Link>
       </div>
 
       <button

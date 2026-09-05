@@ -13,6 +13,8 @@ import Clients from "./pages/Clients";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfServices from "./pages/TermsOfServices";
 
 import AdminDashboard from "./pages/AdminDashboard";
 import Users from "./pages/admin/Users";
@@ -36,6 +38,10 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* Legal pages */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-services" element={<TermsOfServices />} />
       </Route>
 
       {/* Protected administration */}
@@ -48,7 +54,10 @@ function App() {
           <Route path="/admin/reports" element={<Reports />} />
           <Route path="/admin/activity" element={<Activity />} />
           <Route path="/admin/settings" element={<Settings />} />
-          <Route path="/admin/contact-messages" element={<ContactMessages />} />
+          <Route
+            path="/admin/contact-messages"
+            element={<ContactMessages />}
+          />
         </Route>
       </Route>
     </Routes>

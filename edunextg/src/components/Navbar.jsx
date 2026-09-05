@@ -50,7 +50,11 @@ function Navbar() {
           </Link>
         </nav>
 
-        <Link to="/login" className="login-button desktop-login">
+        <Link
+          to="/login"
+          className="login-button desktop-login"
+          onClick={closeMenu}
+        >
           <FiUser className="login-icon" />
           Login
         </Link>

@@ -27,8 +27,8 @@ function Footer() {
           <h3>Quick Link</h3>
 
           <a href="/">-Home</a>
-          <a href="#privacy">-Privacy Policy</a>
-          <a href="#terms">-Terms of Services</a>
+          <a href="/privacy-policy">-Privacy Policy</a>
+          <a href="/terms-of-services">-Terms of Services</a>
         </div>
 
         <div className="footer-contact">

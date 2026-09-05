@@ -1,5 +1,6 @@
 import { FiArrowRight } from "react-icons/fi";
 import { coreServices } from "../data/homeData";
+import { Link } from "react-router-dom";
 
 function CoreServices() {
   return (
@@ -20,10 +21,10 @@ function CoreServices() {
           ))}
         </div>
 
-        <a href="#services" className="primary-button services-button">
+        <Link to="/services" className="primary-button services-button">
           View All Services
           <FiArrowRight />
-        </a>
+        </Link>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import { FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 function CTA() {
   return (
@@ -17,10 +18,10 @@ function CTA() {
           </p>
         </div>
 
-        <a href="#contact" className="cta-button">
+        <Link to="/contact" className="cta-button">
           Contact Us
           <FiArrowRight />
-        </a>
+        </Link>
       </div>
     </section>
   );

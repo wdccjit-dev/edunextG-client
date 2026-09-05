@@ -1,6 +1,7 @@
 // src/pages/admin/Activity.jsx
 
 import { useEffect, useState } from "react";
+import styles from "./Activity.module.css";
 
 function Activity() {
   const [activities, setActivities] = useState([]);
@@ -77,8 +78,8 @@ function Activity() {
   };
 
   return (
-    <div className="admin-page">
-      <div className="admin-page-header">
+    <div className={styles.adminPage}>
+      <div className={styles.adminPageHeader}>
         <span>SYSTEM ACTIVITY</span>
         <h2>Activity</h2>
         <p>
@@ -86,9 +87,9 @@ function Activity() {
         </p>
       </div>
 
-      <div className="admin-table-panel">
-        <div className="admin-table-wrapper">
-          <table className="admin-table">
+      <div className={styles.adminTablePanel}>
+        <div className={styles.adminTableWrapper}>
+          <table className={styles.adminTable}>
             <thead>
               <tr>
                 <th>Action</th>

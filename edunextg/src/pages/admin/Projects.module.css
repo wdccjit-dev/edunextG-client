@@ -1,0 +1,458 @@
+/* src/pages/admin/Projects.module.css */
+
+.adminPage {
+  min-height: calc(100vh - 82px);
+}
+
+.adminPageHeader {
+  margin-bottom: 25px;
+}
+
+.adminPageHeader span {
+  color: #8eae28;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.adminPageHeader h2 {
+  margin: 7px 0 5px;
+  color: #06294f;
+  font-size: 24px;
+}
+
+.adminPageHeader p {
+  margin: 0;
+  color: #748292;
+  font-size: 12px;
+}
+
+.adminToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.adminSearchWrapper {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+  height: 42px;
+}
+
+.adminSearchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8a96a3;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.adminSearch {
+  width: 100%;
+  height: 42px;
+  padding: 0 38px 0 38px;
+  border: 1px solid #dce2e8;
+  border-radius: 8px;
+  outline: none;
+  font-size: 13px;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.adminSearch:focus {
+  border-color: #8eae28;
+  box-shadow: 0 0 0 3px rgba(142, 174, 40, 0.1);
+}
+
+.adminSearch::placeholder {
+  color: #aab4c0;
+}
+
+.adminSearchClear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: transparent;
+  color: #8a96a3;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adminSearchClear:hover {
+  background: #f0f0f0;
+  color: #dc2626;
+}
+
+.adminAddButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  min-width: 140px;
+  height: 42px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  text-decoration: none;
+  background: #8eae28;
+  color: #fff;
+  border: 1px solid #8eae28;
+}
+
+.adminAddButton:hover {
+  background: #a6c93a;
+  border-color: #a6c93a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(142, 174, 40, 0.3);
+}
+
+.adminTablePanel {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e4e8ed;
+  border-radius: 9px;
+  box-shadow: 0 3px 12px rgba(20, 40, 60, 0.05);
+}
+
+.adminTableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.adminTable {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+}
+
+.adminTable th {
+  padding: 14px 18px;
+  background: #f8fafc;
+  color: #687788;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.adminTable td {
+  padding: 15px 18px;
+  border-top: 1px solid #edf0f3;
+  color: #435466;
+  font-size: 11px;
+}
+
+.adminTable tbody tr:hover {
+  background: #fafcfd;
+}
+
+.adminTable strong {
+  color: #243b53;
+}
+
+.adminStatus {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 9px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.adminStatus.active {
+  background: #edf6dc;
+  color: #63850f;
+}
+
+.adminStatus.pending {
+  background: #fff3dd;
+  color: #bd7817;
+}
+
+.adminStatus.completed {
+  background: #e8f1ff;
+  color: #2563eb;
+}
+
+.adminStatus.inactive {
+  background: #fbe8e8;
+  color: #bd4e4e;
+}
+
+.adminActions {
+  display: flex;
+  gap: 8px;
+}
+
+.adminEditBtn,
+.adminDeleteBtn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adminEditBtn {
+  color: #2563eb;
+}
+
+.adminEditBtn:hover {
+  background: #e8f1ff;
+}
+
+.adminDeleteBtn {
+  color: #dc2626;
+}
+
+.adminDeleteBtn:hover {
+  background: #fee2e2;
+}
+
+.adminTableFooter {
+  padding: 12px 20px;
+  border-top: 1px solid #edf0f3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafbfc;
+}
+
+.adminTableFooter span {
+  color: #8a96a3;
+  font-size: 12px;
+}
+
+/* Modal Styles */
+.adminModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFade 0.25s ease;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.adminModal {
+  background: #fff;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+.adminModalHeader {
+  padding: 24px 28px;
+  border-bottom: 1px solid #edf0f3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminModalHeader h3 {
+  margin: 0;
+  color: #06294f;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.adminModalClose {
+  border: 0;
+  background: transparent;
+  font-size: 24px;
+  color: #8a96a3;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.adminModalClose:hover {
+  color: #dc2626;
+}
+
+.adminModalBody {
+  padding: 28px;
+}
+
+.adminFormGroup {
+  margin-bottom: 15px;
+}
+
+.adminFormGroup label {
+  display: block;
+  margin-bottom: 6px;
+  color: #526273;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.adminFormGroup input,
+.adminFormGroup select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #dce2e8;
+  border-radius: 6px;
+  outline: none;
+  font-size: 11px;
+}
+
+.adminFormGroup input:focus,
+.adminFormGroup select:focus {
+  border-color: #8eae28;
+}
+
+.adminModalFooter {
+  padding: 20px 28px;
+  border-top: 1px solid #edf0f3;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.adminCancelBtn {
+  padding: 10px 20px;
+  min-width: 120px;
+  height: 42px;
+  border: 1px solid #dce2e8;
+  border-radius: 8px;
+  background: #fff;
+  color: #526273;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adminCancelBtn:hover {
+  background: #f8fafc;
+  border-color: #8eae28;
+}
+
+.adminGenerateBtn {
+  padding: 10px 24px;
+  min-width: 120px;
+  height: 42px;
+  border: 0;
+  border-radius: 8px;
+  background: #8eae28;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.adminGenerateBtn:hover {
+  background: #a6c93a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(142, 174, 40, 0.3);
+}
+
+@media (max-width: 768px) {
+  .adminSearchWrapper {
+    max-width: 100%;
+    width: 100%;
+    height: 40px;
+  }
+
+  .adminSearch {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .adminAddButton {
+    min-width: 120px;
+    height: 38px;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .adminToolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .adminToolbar .adminAddButton {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .adminModalFooter {
+    flex-direction: column;
+  }
+
+  .adminModalFooter .adminCancelBtn,
+  .adminModalFooter .adminGenerateBtn {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .adminPageHeader h2 {
+    font-size: 21px;
+  }
+
+  .adminTablePanel {
+    border-radius: 7px;
+  }
+
+  .adminAddButton {
+    min-width: 100px;
+    height: 36px;
+    padding: 6px 14px;
+    font-size: 11px;
+  }
+}

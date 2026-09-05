@@ -1,5 +1,8 @@
+// src/pages/admin/Services.jsx
+
 import { useEffect, useState } from "react";
 import { FiEdit2, FiPlus, FiTrash2, FiSearch, FiX } from "react-icons/fi";
+import styles from "./Services.module.css";
 
 function Services() {
   const [services, setServices] = useState([]);
@@ -246,19 +249,19 @@ function Services() {
   };
 
   return (
-    <div className="admin-page">
-      <div className="admin-page-header">
+    <div className={styles.adminPage}>
+      <div className={styles.adminPageHeader}>
         <span>SERVICE MANAGEMENT</span>
         <h2>Services</h2>
         <p>Manage EduNextG services and offerings.</p>
       </div>
 
-      <div className="admin-toolbar">
-        <div className="admin-search-wrapper">
-          <FiSearch className="admin-search-icon" />
+      <div className={styles.adminToolbar}>
+        <div className={styles.adminSearchWrapper}>
+          <FiSearch className={styles.adminSearchIcon} />
 
           <input
-            className="admin-search"
+            className={styles.adminSearch}
             type="search"
             placeholder="Search services by name or category..."
             value={searchTerm}
@@ -267,7 +270,7 @@ function Services() {
 
           {searchTerm && (
             <button
-              className="admin-search-clear"
+              className={styles.adminSearchClear}
               onClick={() => setSearchTerm("")}
             >
               <FiX />
@@ -276,16 +279,16 @@ function Services() {
         </div>
 
         <button
-          className="admin-add-button"
+          className={styles.adminAddButton}
           onClick={() => setShowAddModal(true)}
         >
           <FiPlus /> Add Service
         </button>
       </div>
 
-      <div className="admin-table-panel">
-        <div className="admin-table-wrapper">
-          <table className="admin-table">
+      <div className={styles.adminTablePanel}>
+        <div className={styles.adminTableWrapper}>
+          <table className={styles.adminTable}>
             <thead>
               <tr>
                 <th>Service Name</th>
@@ -333,7 +336,7 @@ function Services() {
 
                     <td>
                       <span
-                        className={`admin-status ${service.status}`}
+                        className={`${styles.adminStatus} ${styles[service.status]}`}
                         style={{ cursor: "pointer" }}
                         onClick={() => toggleStatus(service.id)}
                         title="Click to toggle status"
@@ -342,16 +345,16 @@ function Services() {
                       </span>
                     </td>
 
-                    <td className="admin-actions">
+                    <td className={styles.adminActions}>
                       <button
-                        className="admin-edit-btn"
+                        className={styles.adminEditBtn}
                         onClick={() => handleEditService(service)}
                       >
                         <FiEdit2 />
                       </button>
 
                       <button
-                        className="admin-delete-btn"
+                        className={styles.adminDeleteBtn}
                         onClick={() =>
                           handleDeleteService(service.id)
                         }
@@ -366,7 +369,7 @@ function Services() {
           </table>
         </div>
 
-        <div className="admin-table-footer">
+        <div className={styles.adminTableFooter}>
           <span>
             Showing {filteredServices.length} of {services.length} services
           </span>
@@ -375,14 +378,14 @@ function Services() {
 
       {showAddModal && (
         <div
-          className="admin-modal-overlay"
+          className={styles.adminModalOverlay}
           onClick={handleCloseModal}
         >
           <div
-            className="admin-modal"
+            className={styles.adminModal}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="admin-modal-header">
+            <div className={styles.adminModalHeader}>
               <h3>
                 {editingService
                   ? "Edit Service"
@@ -390,15 +393,15 @@ function Services() {
               </h3>
 
               <button
-                className="admin-modal-close"
+                className={styles.adminModalClose}
                 onClick={handleCloseModal}
               >
                 <FiX />
               </button>
             </div>
 
-            <div className="admin-modal-body">
-              <div className="admin-form-group">
+            <div className={styles.adminModalBody}>
+              <div className={styles.adminFormGroup}>
                 <label>Service Name</label>
 
                 <input
@@ -414,7 +417,7 @@ function Services() {
                 />
               </div>
 
-              <div className="admin-form-group">
+              <div className={styles.adminFormGroup}>
                 <label>Category</label>
 
                 <select
@@ -433,7 +436,7 @@ function Services() {
                 </select>
               </div>
 
-              <div className="admin-form-group">
+              <div className={styles.adminFormGroup}>
                 <label>Status</label>
 
                 <select
@@ -451,16 +454,16 @@ function Services() {
               </div>
             </div>
 
-            <div className="admin-modal-footer">
+            <div className={styles.adminModalFooter}>
               <button
-                className="admin-cancel-btn"
+                className={styles.adminCancelBtn}
                 onClick={handleCloseModal}
               >
                 Cancel
               </button>
 
               <button
-                className="admin-generate-btn"
+                className={styles.adminGenerateBtn}
                 onClick={
                   editingService
                     ? handleUpdateService

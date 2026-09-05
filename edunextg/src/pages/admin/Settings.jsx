@@ -1,24 +1,26 @@
 // src/pages/admin/Settings.jsx
+
 import { useState, useEffect } from "react";
 import { FiSave, FiCheck, FiAlertCircle, FiX } from "react-icons/fi";
+import styles from "./Settings.module.css";
 
 function Settings() {
   const [settings, setSettings] = useState({
-  companyName: "EduNextG",
-  email: "admin@edunextg.com",
-  phone: "+91 98765 43210",
-  address: "123 Education Street, Kolkata, India",
-  website: "www.edunextg.com",
-  systemStatus: "active",
-  emailNotifications: "enabled",
-  notes: "All systems operational.",
+    companyName: "EduNextG",
+    email: "admin@edunextg.com",
+    phone: "+91 98765 43210",
+    address: "123 Education Street, Kolkata, India",
+    website: "www.edunextg.com",
+    systemStatus: "active",
+    emailNotifications: "enabled",
+    notes: "All systems operational.",
 
-  mapLocation:
-    "EDUNEXTG INDIA LLP, AF-333, Rabindra Pally Rd, Talbagan, Prafulla Kanan, Kestopur, Kolkata, West Bengal 700102",
+    mapLocation:
+      "EDUNEXTG INDIA LLP, AF-333, Rabindra Pally Rd, Talbagan, Prafulla Kanan, Kestopur, Kolkata, West Bengal 700102",
 
-  mapUrl:
-    "https://www.google.com/maps?q=EDUNEXTG%20INDIA%20LLP%2C%20AF-333%2C%20Rabindra%20Pally%20Rd%2C%20Talbagan%2C%20Prafulla%20Kanan%2C%20Kestopur%2C%20Kolkata%2C%20West%20Bengal%20700102&output=embed",
-});
+    mapUrl:
+      "https://www.google.com/maps?q=EDUNEXTG%20INDIA%20LLP%2C%20AF-333%2C%20Rabindra%20Pally%20Rd%2C%20Talbagan%2C%20Prafulla%20Kanan%2C%20Kestopur%2C%20Kolkata%2C%20West%20Bengal%20700102&output=embed",
+  });
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -129,16 +131,16 @@ function Settings() {
   };
 
   return (
-    <div className="admin-page">
-      <div className="admin-page-header">
+    <div className={styles.adminPage}>
+      <div className={styles.adminPageHeader}>
         <span>SYSTEM CONFIGURATION</span>
         <h2>Settings</h2>
         <p>Configure administration and platform settings.</p>
       </div>
 
       {notification && (
-        <div className={`admin-toast ${notification.type}`}>
-          <div className={`admin-toast-icon ${notification.type}`}>
+        <div className={`${styles.adminToast} ${styles[notification.type]}`}>
+          <div className={`${styles.adminToastIcon} ${styles[notification.type]}`}>
             {notification.type === "success" ? (
               <FiCheck />
             ) : (
@@ -146,7 +148,7 @@ function Settings() {
             )}
           </div>
 
-          <div className="admin-toast-content">
+          <div className={styles.adminToastContent}>
             <h4>
               {notification.type === "success"
                 ? "Success"
@@ -157,7 +159,7 @@ function Settings() {
           </div>
 
           <button
-            className="admin-toast-close"
+            className={styles.adminToastClose}
             onClick={() => setNotification(null)}
           >
             <FiX />
@@ -165,12 +167,12 @@ function Settings() {
         </div>
       )}
 
-      <div className="admin-settings-grid">
-        <section className="admin-settings-card admin-settings-full">
+      <div className={styles.adminSettingsGrid}>
+        <section className={`${styles.adminSettingsCard} ${styles.adminSettingsFull}`}>
           <h3>General Settings</h3>
 
-          <div className="admin-settings-grid-inner">
-            <div className="admin-form-group">
+          <div className={styles.adminSettingsGridInner}>
+            <div className={styles.adminFormGroup}>
               <label>Company Name</label>
               <input
                 type="text"
@@ -181,7 +183,7 @@ function Settings() {
               />
             </div>
 
-            <div className="admin-form-group">
+            <div className={styles.adminFormGroup}>
               <label>Administrator Email</label>
               <input
                 type="email"
@@ -192,7 +194,7 @@ function Settings() {
               />
             </div>
 
-            <div className="admin-form-group">
+            <div className={styles.adminFormGroup}>
               <label>Phone Number</label>
               <input
                 type="tel"
@@ -203,7 +205,7 @@ function Settings() {
               />
             </div>
 
-            <div className="admin-form-group">
+            <div className={styles.adminFormGroup}>
               <label>Website</label>
               <input
                 type="text"
@@ -214,7 +216,7 @@ function Settings() {
               />
             </div>
 
-            <div className="admin-form-group admin-form-full">
+            <div className={`${styles.adminFormGroup} ${styles.adminFormFull}`}>
               <label>Address</label>
               <textarea
                 name="address"
@@ -225,7 +227,7 @@ function Settings() {
               />
             </div>
 
-            <div className="admin-form-group">
+            <div className={styles.adminFormGroup}>
               <label>System Status</label>
               <select
                 name="systemStatus"
@@ -239,7 +241,7 @@ function Settings() {
               </select>
             </div>
 
-            <div className="admin-form-group">
+            <div className={styles.adminFormGroup}>
               <label>Email Notifications</label>
               <select
                 name="emailNotifications"
@@ -252,7 +254,7 @@ function Settings() {
               </select>
             </div>
 
-            <div className="admin-form-group admin-form-full">
+            <div className={`${styles.adminFormGroup} ${styles.adminFormFull}`}>
               <label>Notes</label>
               <textarea
                 name="notes"
@@ -265,9 +267,9 @@ function Settings() {
             </div>
           </div>
 
-          <div className="admin-form-actions">
+          <div className={styles.adminFormActions}>
             <button
-              className="admin-save-button"
+              className={styles.adminSaveButton}
               onClick={handleSave}
               disabled={loading || saving}
             >
@@ -276,14 +278,15 @@ function Settings() {
           </div>
         </section>
       </div>
-      <div className="settings-map-section">
+
+      <div className={styles.settingsMapSection}>
         <h3>Google Maps</h3>
 
-        <p className="settings-map-description">
+        <p className={styles.settingsMapDescription}>
           Manage the location displayed on the Contact Us page.
         </p>
 
-        <div className="settings-map-field">
+        <div className={styles.settingsMapField}>
           <label htmlFor="mapLocation">
             Google Maps Location
           </label>
@@ -302,7 +305,7 @@ function Settings() {
           />
         </div>
 
-        <div className="settings-map-field">
+        <div className={styles.settingsMapField}>
           <label htmlFor="mapUrl">
             Google Maps Embed URL
           </label>
@@ -310,7 +313,7 @@ function Settings() {
           <input
             id="mapUrl"
             type="text"
-            className="settings-map-url-input"
+            className={styles.settingsMapUrlInput}
             value={settings.mapUrl}
             onChange={(e) =>
               setSettings((previous) => ({

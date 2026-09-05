@@ -1,0 +1,346 @@
+/* src/pages/admin/Settings.module.css */
+
+.adminPage {
+  min-height: calc(100vh - 82px);
+}
+
+.adminPageHeader {
+  margin-bottom: 25px;
+}
+
+.adminPageHeader span {
+  color: #8eae28;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.adminPageHeader h2 {
+  margin: 7px 0 5px;
+  color: #06294f;
+  font-size: 24px;
+}
+
+.adminPageHeader p {
+  margin: 0;
+  color: #748292;
+  font-size: 12px;
+}
+
+/* Toast Notification */
+.adminToast {
+  position: fixed;
+  top: 100px;
+  right: 30px;
+  z-index: 3000;
+  padding: 16px 24px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 320px;
+  max-width: 480px;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.adminToast.success {
+  border-left: 4px solid #8eae28;
+}
+
+.adminToast.error {
+  border-left: 4px solid #dc2626;
+}
+
+.adminToast.info {
+  border-left: 4px solid #2563eb;
+}
+
+.adminToastIcon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.adminToastIcon.success {
+  color: #8eae28;
+}
+
+.adminToastIcon.error {
+  color: #dc2626;
+}
+
+.adminToastIcon.info {
+  color: #2563eb;
+}
+
+.adminToastContent {
+  flex: 1;
+}
+
+.adminToastContent h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #06294f;
+}
+
+.adminToastContent p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #748292;
+}
+
+.adminToastClose {
+  border: 0;
+  background: transparent;
+  color: #8a96a3;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.adminToastClose:hover {
+  color: #dc2626;
+}
+
+/* Settings Grid */
+.adminSettingsGrid {
+  display: grid;
+  gap: 20px;
+}
+
+.adminSettingsCard {
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #e4e8ed;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(20, 40, 60, 0.05);
+}
+
+.adminSettingsCard h3 {
+  margin: 0 0 24px;
+  color: #06294f;
+  font-size: 18px;
+  font-weight: 700;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f0f2f5;
+}
+
+.adminSettingsFull {
+  grid-column: 1 / -1;
+}
+
+.adminSettingsGridInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.adminFormGroup {
+  margin-bottom: 0;
+}
+
+.adminFormFull {
+  grid-column: 1 / -1;
+}
+
+.adminFormGroup label {
+  display: block;
+  margin-bottom: 8px;
+  color: #526273;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.adminFormGroup input,
+.adminFormGroup select,
+.adminFormGroup textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #dce2e8;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  background: #fff;
+  transition: all 0.2s ease;
+  color: #172b4d;
+}
+
+.adminFormGroup input:focus,
+.adminFormGroup select:focus,
+.adminFormGroup textarea:focus {
+  border-color: #8eae28;
+  box-shadow: 0 0 0 3px rgba(142, 174, 40, 0.1);
+}
+
+.adminFormGroup textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.adminFormActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #edf0f3;
+  flex-wrap: wrap;
+}
+
+.adminSaveButton {
+  padding: 11px 28px;
+  min-width: 160px;
+  height: 44px;
+  border: 0;
+  border-radius: 8px;
+  background: #8eae28;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.adminSaveButton:hover:not(:disabled) {
+  background: #a6c93a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(142, 174, 40, 0.3);
+}
+
+.adminSaveButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Google Maps Section */
+.settingsMapSection {
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #e4e8ed;
+}
+
+.settingsMapSection h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #06294f;
+}
+
+.settingsMapDescription {
+  margin: 0 0 24px;
+  color: #748292;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.settingsMapField {
+  margin-bottom: 20px;
+}
+
+.settingsMapField label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #06294f;
+}
+
+.settingsMapField input {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  box-sizing: border-box;
+  border: 1px solid #dce2e8;
+  border-radius: 8px;
+  background: #fff;
+  color: #172b4d;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.settingsMapField input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+.settingsMapField small {
+  display: block;
+  margin-top: 7px;
+  color: #748292;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.settingsMapUrlInput {
+  /* Additional styles if needed */
+}
+
+@media (max-width: 1024px) {
+  .adminSettingsGridInner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .adminSettingsGridInner {
+    grid-template-columns: 1fr;
+  }
+
+  .adminFormFull {
+    grid-column: 1;
+  }
+
+  .adminFormActions {
+    flex-direction: column;
+  }
+
+  .adminSaveButton {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .adminToast {
+    right: 16px;
+    left: 16px;
+    min-width: auto;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .adminSettingsCard h3 {
+    font-size: 16px;
+  }
+
+  .adminFormGroup label {
+    font-size: 12px;
+  }
+
+  .adminFormGroup input,
+  .adminFormGroup select,
+  .adminFormGroup textarea {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .adminPageHeader h2 {
+    font-size: 21px;
+  }
+}

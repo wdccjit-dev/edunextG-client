@@ -1,4 +1,7 @@
+// src/pages/admin/ContactMessages.jsx
+
 import { useEffect, useState } from "react";
+import styles from "./ContactMessages.module.css";
 
 function ContactMessages() {
   const [messages, setMessages] = useState([]);
@@ -227,12 +230,12 @@ function ContactMessages() {
 
   if (loading) {
     return (
-      <div className="admin-page">
-        <div className="admin-page-header">
+      <div className={styles.adminPage}>
+        <div className={styles.adminPageHeader}>
           <h1>Contact Messages</h1>
         </div>
 
-        <div className="admin-loading">
+        <div className={styles.adminLoading}>
           Loading messages...
         </div>
       </div>
@@ -240,13 +243,13 @@ function ContactMessages() {
   }
 
   return (
-    <div className="admin-page">
+    <div className={styles.adminPage}>
 
       {/* =========================
           PAGE HEADER
       ========================= */}
 
-      <div className="admin-page-header">
+      <div className={styles.adminPageHeader}>
         <div>
           <h1>Contact Messages</h1>
 
@@ -258,7 +261,7 @@ function ContactMessages() {
 
         <button
           type="button"
-          className="admin-refresh-button"
+          className={styles.adminRefreshButton}
           onClick={fetchMessages}
         >
           Refresh
@@ -266,7 +269,7 @@ function ContactMessages() {
       </div>
 
       {error && (
-        <div className="admin-error">
+        <div className={styles.adminError}>
           {error}
         </div>
       )}
@@ -275,10 +278,10 @@ function ContactMessages() {
           MESSAGES TABLE
       ========================= */}
 
-      <div className="contact-messages-card">
+      <div className={styles.contactMessagesCard}>
 
         {messages.length === 0 ? (
-          <div className="contact-no-messages">
+          <div className={styles.contactNoMessages}>
             <h3>No messages yet</h3>
 
             <p>
@@ -287,9 +290,9 @@ function ContactMessages() {
             </p>
           </div>
         ) : (
-          <div className="contact-messages-table-wrapper">
+          <div className={styles.contactMessagesTableWrapper}>
 
-            <table className="contact-messages-table">
+            <table className={styles.contactMessagesTable}>
 
               <thead>
                 <tr>
@@ -327,7 +330,7 @@ function ContactMessages() {
                       {message.subject}
                     </td>
 
-                    <td className="contact-message-text">
+                    <td className={styles.contactMessageText}>
                       {message.message}
                     </td>
 
@@ -364,11 +367,11 @@ function ContactMessages() {
                     {/* ACTIONS */}
 
                     <td>
-                      <div className="contact-actions">
+                      <div className={styles.contactActions}>
 
                         <button
                           type="button"
-                          className="contact-reply-button"
+                          className={styles.contactReplyButton}
                           onClick={() =>
                             openReplyModal(message)
                           }
@@ -378,7 +381,7 @@ function ContactMessages() {
 
                         <button
                           type="button"
-                          className="contact-delete-button"
+                          className={styles.contactDeleteButton}
                           onClick={() =>
                             deleteMessage(message.id)
                           }
@@ -406,7 +409,7 @@ function ContactMessages() {
 
       {replyMessage && (
         <div
-          className="reply-modal-overlay"
+          className={styles.replyModalOverlay}
           onMouseDown={(event) => {
             if (
               event.target === event.currentTarget &&
@@ -417,11 +420,11 @@ function ContactMessages() {
           }}
         >
 
-          <div className="reply-modal">
+          <div className={styles.replyModal}>
 
             {/* HEADER */}
 
-            <div className="reply-modal-header">
+            <div className={styles.replyModalHeader}>
 
               <div>
                 <h2>
@@ -435,7 +438,7 @@ function ContactMessages() {
 
               <button
                 type="button"
-                className="reply-modal-close"
+                className={styles.replyModalClose}
                 onClick={closeReplyModal}
                 disabled={sendingReply}
               >
@@ -446,7 +449,7 @@ function ContactMessages() {
 
             {/* RECIPIENT */}
 
-            <div className="reply-recipient">
+            <div className={styles.replyRecipient}>
 
               <div>
                 <span>To:</span>
@@ -466,7 +469,7 @@ function ContactMessages() {
 
             {/* ORIGINAL MESSAGE */}
 
-            <div className="reply-original-message">
+            <div className={styles.replyOriginalMessage}>
 
               <strong>
                 ORIGINAL MESSAGE
@@ -486,7 +489,7 @@ function ContactMessages() {
             {/* REPLY FORM */}
 
             <form
-              className="reply-form"
+              className={styles.replyForm}
               onSubmit={sendReply}
             >
 
@@ -506,11 +509,11 @@ function ContactMessages() {
 
               {/* BUTTONS */}
 
-              <div className="reply-modal-actions">
+              <div className={styles.replyModalActions}>
 
                 <button
                   type="button"
-                  className="reply-cancel-button"
+                  className={styles.replyCancelButton}
                   onClick={closeReplyModal}
                   disabled={sendingReply}
                 >
@@ -519,7 +522,7 @@ function ContactMessages() {
 
                 <button
                   type="submit"
-                  className="reply-send-button"
+                  className={styles.replySendButton}
                   disabled={
                     sendingReply ||
                     !replyText.trim()

@@ -1,5 +1,8 @@
+// src/pages/admin/Projects.jsx
+
 import { useEffect, useState } from "react";
 import { FiEdit2, FiPlus, FiTrash2, FiSearch, FiX } from "react-icons/fi";
+import styles from "./Projects.module.css";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -311,19 +314,19 @@ function Projects() {
   };
 
   return (
-    <div className="admin-page">
-      <div className="admin-page-header">
+    <div className={styles.adminPage}>
+      <div className={styles.adminPageHeader}>
         <span>PROJECT MANAGEMENT</span>
         <h2>Projects</h2>
         <p>Manage projects and client implementation records.</p>
       </div>
 
-      <div className="admin-toolbar">
-        <div className="admin-search-wrapper">
-          <FiSearch className="admin-search-icon" />
+      <div className={styles.adminToolbar}>
+        <div className={styles.adminSearchWrapper}>
+          <FiSearch className={styles.adminSearchIcon} />
 
           <input
-            className="admin-search"
+            className={styles.adminSearch}
             type="search"
             placeholder="Search projects by name, client, or type..."
             value={searchTerm}
@@ -332,7 +335,7 @@ function Projects() {
 
           {searchTerm && (
             <button
-              className="admin-search-clear"
+              className={styles.adminSearchClear}
               onClick={() => setSearchTerm("")}
             >
               <FiX />
@@ -341,16 +344,16 @@ function Projects() {
         </div>
 
         <button
-          className="admin-add-button"
+          className={styles.adminAddButton}
           onClick={() => setShowAddModal(true)}
         >
           <FiPlus /> Add Project
         </button>
       </div>
 
-      <div className="admin-table-panel">
-        <div className="admin-table-wrapper">
-          <table className="admin-table">
+      <div className={styles.adminTablePanel}>
+        <div className={styles.adminTableWrapper}>
+          <table className={styles.adminTable}>
             <thead>
               <tr>
                 <th>Project</th>
@@ -401,7 +404,7 @@ function Projects() {
 
                     <td>
                       <span
-                        className={`admin-status ${project.status}`}
+                        className={`${styles.adminStatus} ${styles[project.status]}`}
                         style={{ cursor: "pointer" }}
                         onClick={() =>
                           toggleStatus(project.id)
@@ -412,9 +415,9 @@ function Projects() {
                       </span>
                     </td>
 
-                    <td className="admin-actions">
+                    <td className={styles.adminActions}>
                       <button
-                        className="admin-edit-btn"
+                        className={styles.adminEditBtn}
                         onClick={() =>
                           handleEditProject(project)
                         }
@@ -423,7 +426,7 @@ function Projects() {
                       </button>
 
                       <button
-                        className="admin-delete-btn"
+                        className={styles.adminDeleteBtn}
                         onClick={() =>
                           handleDeleteProject(project.id)
                         }
@@ -438,7 +441,7 @@ function Projects() {
           </table>
         </div>
 
-        <div className="admin-table-footer">
+        <div className={styles.adminTableFooter}>
           <span>
             Showing {filteredProjects.length} of{" "}
             {projects.length} projects
@@ -449,14 +452,14 @@ function Projects() {
       {/* Add/Edit Project Modal */}
       {showAddModal && (
         <div
-          className="admin-modal-overlay"
+          className={styles.adminModalOverlay}
           onClick={handleCloseModal}
         >
           <div
-            className="admin-modal"
+            className={styles.adminModal}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="admin-modal-header">
+            <div className={styles.adminModalHeader}>
               <h3>
                 {editingProject
                   ? "Edit Project"
@@ -464,15 +467,15 @@ function Projects() {
               </h3>
 
               <button
-                className="admin-modal-close"
+                className={styles.adminModalClose}
                 onClick={handleCloseModal}
               >
                 <FiX />
               </button>
             </div>
 
-            <div className="admin-modal-body">
-              <div className="admin-form-group">
+            <div className={styles.adminModalBody}>
+              <div className={styles.adminFormGroup}>
                 <label>Project Name</label>
 
                 <input
@@ -488,7 +491,7 @@ function Projects() {
                 />
               </div>
 
-              <div className="admin-form-group">
+              <div className={styles.adminFormGroup}>
                 <label>Client Name</label>
 
                 <input
@@ -504,7 +507,7 @@ function Projects() {
                 />
               </div>
 
-              <div className="admin-form-group">
+              <div className={styles.adminFormGroup}>
                 <label>Type</label>
 
                 <select
@@ -525,7 +528,7 @@ function Projects() {
                 </select>
               </div>
 
-              <div className="admin-form-group">
+              <div className={styles.adminFormGroup}>
                 <label>Status</label>
 
                 <select
@@ -544,16 +547,16 @@ function Projects() {
               </div>
             </div>
 
-            <div className="admin-modal-footer">
+            <div className={styles.adminModalFooter}>
               <button
-                className="admin-cancel-btn"
+                className={styles.adminCancelBtn}
                 onClick={handleCloseModal}
               >
                 Cancel
               </button>
 
               <button
-                className="admin-generate-btn"
+                className={styles.adminGenerateBtn}
                 onClick={
                   editingProject
                     ? handleUpdateProject

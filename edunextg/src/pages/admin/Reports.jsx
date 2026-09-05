@@ -1,4 +1,7 @@
+// src/pages/admin/Reports.jsx
+
 import { useEffect, useState } from "react";
+import styles from "./Reports.module.css";
 
 function Reports() {
   const [reports, setReports] = useState({
@@ -50,15 +53,15 @@ function Reports() {
   }, []);
 
   return (
-    <div className="admin-page">
-      <div className="admin-page-header">
+    <div className={styles.adminPage}>
+      <div className={styles.adminPageHeader}>
         <span>REPORTING</span>
         <h2>Reports</h2>
         <p>Overview of important platform statistics.</p>
       </div>
 
-      <div className="admin-report-grid">
-        <article className="admin-report-card">
+      <div className={styles.adminReportGrid}>
+        <article className={styles.adminReportCard}>
           <h3>Institutions</h3>
           <strong>
             {loading ? "..." : error ? "-" : reports.institutions}
@@ -66,7 +69,7 @@ function Reports() {
           <p>Total institutions served</p>
         </article>
 
-        <article className="admin-report-card">
+        <article className={styles.adminReportCard}>
           <h3>Projects</h3>
           <strong>
             {loading ? "..." : error ? "-" : reports.projects}
@@ -74,7 +77,7 @@ function Reports() {
           <p>Total projects delivered</p>
         </article>
 
-        <article className="admin-report-card">
+        <article className={styles.adminReportCard}>
           <h3>Services</h3>
           <strong>
             {loading ? "..." : error ? "-" : reports.services}
@@ -82,7 +85,7 @@ function Reports() {
           <p>Currently available services</p>
         </article>
 
-        <article className="admin-report-card">
+        <article className={styles.adminReportCard}>
           <h3>Active Users</h3>
           <strong>
             {loading ? "..." : error ? "-" : reports.activeUsers}

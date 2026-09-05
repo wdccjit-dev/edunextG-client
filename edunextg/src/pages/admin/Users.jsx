@@ -1,5 +1,8 @@
+// src/pages/admin/Users.jsx
+
 import { useEffect, useState } from "react";
 import { FiEdit2, FiPlus, FiTrash2, FiSearch, FiX } from "react-icons/fi";
+import styles from "./Users.module.css";
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -303,20 +306,21 @@ function Users() {
   };
 
   return (
-    <div className="admin-page">
-      <div className="admin-page-header">
+    <div className={styles.adminPage}>
+      <div className={styles.adminPageHeader}>
         <span>USER MANAGEMENT</span>
         <h2>Users</h2>
         <p>Manage company and platform users.</p>
       </div>
 
-        {error && <p style={{ color: "red", margin: "10px 0" }}>{error}</p>}
-      <div className="admin-toolbar">
-        <div className="admin-search-wrapper">
-          <FiSearch className="admin-search-icon" />
+      {error && <p className={styles.adminError}>{error}</p>}
+
+      <div className={styles.adminToolbar}>
+        <div className={styles.adminSearchWrapper}>
+          <FiSearch className={styles.adminSearchIcon} />
 
           <input
-            className="admin-search"
+            className={styles.adminSearch}
             type="search"
             placeholder="Search users by name, email, or role..."
             value={searchTerm}
@@ -325,7 +329,7 @@ function Users() {
 
           {searchTerm && (
             <button
-              className="admin-search-clear"
+              className={styles.adminSearchClear}
               onClick={() => setSearchTerm("")}
             >
               <FiX />
@@ -334,7 +338,7 @@ function Users() {
         </div>
 
         <button
-          className="admin-add-button"
+          className={styles.adminAddButton}
           onClick={() => {
             setEditingUser(null);
             resetForm();
@@ -345,9 +349,9 @@ function Users() {
         </button>
       </div>
 
-      <div className="admin-table-panel">
-        <div className="admin-table-wrapper">
-          <table className="admin-table">
+      <div className={styles.adminTablePanel}>
+        <div className={styles.adminTableWrapper}>
+          <table className={styles.adminTable}>
             <thead>
               <tr>
                 <th>Name</th>
@@ -398,7 +402,7 @@ function Users() {
 
                     <td>
                       <span
-                        className={`admin-status ${user.status}`}
+                        className={`${styles.adminStatus} ${styles[user.status]}`}
                         style={{ cursor: "pointer" }}
                         onClick={() =>
                           toggleStatus(user.id)
@@ -409,9 +413,9 @@ function Users() {
                       </span>
                     </td>
 
-                    <td className="admin-actions">
+                    <td className={styles.adminActions}>
                       <button
-                        className="admin-edit-btn"
+                        className={styles.adminEditBtn}
                         onClick={() =>
                           handleEditUser(user)
                         }
@@ -421,7 +425,7 @@ function Users() {
                       </button>
 
                       <button
-                        className="admin-delete-btn"
+                        className={styles.adminDeleteBtn}
                         onClick={() =>
                           handleDeleteUser(user.id)
                         }
@@ -437,7 +441,7 @@ function Users() {
           </table>
         </div>
 
-        <div className="admin-table-footer">
+        <div className={styles.adminTableFooter}>
           <span>
             Showing {filteredUsers.length} of {users.length} users
           </span>
@@ -447,28 +451,28 @@ function Users() {
       {/* Add/Edit User Modal */}
       {showAddModal && (
         <div
-          className="admin-modal-overlay"
+          className={styles.adminModalOverlay}
           onClick={handleCloseModal}
         >
           <div
-            className="admin-modal"
+            className={styles.adminModal}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="admin-modal-header">
+            <div className={styles.adminModalHeader}>
               <h3>
                 {editingUser ? "Edit User" : "Add New User"}
               </h3>
 
               <button
-                className="admin-modal-close"
+                className={styles.adminModalClose}
                 onClick={handleCloseModal}
               >
                 <FiX />
               </button>
             </div>
 
-            <div className="admin-modal-body">
-              <div className="admin-form-group">
+            <div className={styles.adminModalBody}>
+              <div className={styles.adminFormGroup}>
                 <label>Full Name</label>
 
                 <input
@@ -484,7 +488,7 @@ function Users() {
                 />
               </div>
 
-              <div className="admin-form-group">
+              <div className={styles.adminFormGroup}>
                 <label>Email Address</label>
 
                 <input
@@ -501,7 +505,7 @@ function Users() {
               </div>
 
               {!editingUser && (
-                <div className="admin-form-group">
+                <div className={styles.adminFormGroup}>
                   <label>Password</label>
 
                   <input
@@ -518,7 +522,7 @@ function Users() {
                 </div>
               )}
 
-              <div className="admin-form-group">
+              <div className={styles.adminFormGroup}>
                 <label>Role</label>
 
                 <select
@@ -535,7 +539,7 @@ function Users() {
                 </select>
               </div>
 
-              <div className="admin-form-group">
+              <div className={styles.adminFormGroup}>
                 <label>Status</label>
 
                 <select
@@ -553,16 +557,16 @@ function Users() {
               </div>
             </div>
 
-            <div className="admin-modal-footer">
+            <div className={styles.adminModalFooter}>
               <button
-                className="admin-cancel-btn"
+                className={styles.adminCancelBtn}
                 onClick={handleCloseModal}
               >
                 Cancel
               </button>
 
               <button
-                className="admin-generate-btn"
+                className={styles.adminGenerateBtn}
                 onClick={
                   editingUser
                     ? handleUpdateUser
